@@ -1,0 +1,25 @@
+/* floating box of context help */
+#helptip{
+	position: fixed;
+	background-color: #BFE;
+	border-radius: 5px;
+	color: black;
+	max-width: 400px;
+	max-height: 500px;
+	padding: 5px;
+	z-index: 100;
+}
+/* label on help tip */
+.redtxt{
+	color: red;
+	margin-top: 20px;
+}
+/* context help caller */
+.helperdiv{
+	position: fixed;
+	right: 0px;
+	top: 0px;
+}
+/* anchor with text "context help" inside helperdiv */
+.helperanchor{
+}

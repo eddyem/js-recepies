@@ -1,0 +1,91 @@
+<html>
+<head><title>Different usefull small scripts</title>
+<meta http-equiv="content-type" content="text/html; charset=koi8-r">
+<!-- Drag and resize -->
+<script src="dragJS/dragJS.js"></script>
+<link rel="stylesheet" href="dragJS/dragJS.css">
+<!-- Date/time -->
+<script src="datetime/datetime.js"></script>
+<link rel="stylesheet" href="datetime/datetime.css">
+<!-- Context help -->
+<script src="contexthelp/contexthelp.js"></script>
+<link rel="stylesheet" href="contexthelp/contexthelp.css">
+
+<script>
+var elementsCache = {};
+function $(id) {
+	if (elementsCache[id] === undefined)
+		elementsCache[id] = document.getElementById(id);
+	return elementsCache[id];
+}
+function start(){
+// dragJS
+	addDR();
+// datetime
+	initDatePicker("datetime");
+// contexthelp
+	initContextHelp();
+}
+//    Example of dragJS usage --->
+var dragged;
+function addDR(){
+	dragged = DRdiv("Drag me and resize me!");
+	dragged.id = "DRdiv";
+	dragged.place(300,300);
+	dragged.resize(250,250);
+	var rdr = $("rmDR");
+	rdr.innerHTML = "remove DR";
+	rdr.onclick = rm;
+}
+function rm(){
+	dragged.delete();
+	var rdr = $("rmDR");
+	rdr.innerHTML = "add DR";
+	rdr.onclick = addDR;
+}
+// <--- Example of dragJS usage
+
+// Example of datetime usage --->
+var datepicker = null;
+function initDatePicker(elID){
+	var days = ["Вс", "Пн", "Вт", "Ср", "Чт", "Пт", "Сб"];
+	var months=["Январь", "Февраль", "Март", "Апрель", "Май", "Июнь", "Июль",
+				"Август", "Сентябрь", "Октябрь", "Ноябрь", "Декабрь"];
+	datepicker = new DatePicker(elID, false, "dmy", ".", false, days, months);
+}
+function datetime(){
+	datepicker.display();
+}
+function show_dt(){
+	if(!datepicker) return;
+	var D = datepicker.getDate();
+	if(!D) return;
+	alert(D.toLocaleString());
+}
+// <--- Example of datetime usage
+
+// Example of contexthelp usage --->
+var helptip;
+function initContextHelp(){
+	const helpArr = {
+		DRdiv:    "This is a draggable and resizible div",
+		rmDR:     "Press this to remove or create draggable and resizible div.<br> Try it!",
+		datetime: "This is a sample datetime field.<br>You can try to select date and time by clicking on image: <img src='datetime/cal.jpg'.",
+		dtimg:    "Click this image to call date/time picker.",
+		showdt:   "Click it for alert with date object from field to the left."
+	};
+	const helpLbl = "Click me or press ESC<br>Нажми же на меня (или хотя бы на ESC)!";
+	helptip = new ContextHelp();
+	helptip.init(helpArr, helpLbl);
+	helptip.mkLabel("Press 4 help");
+}
+
+// <--- Example of contexthelp usage
+</script>
+</head>
+<body onload="start();">
+<span id="rmDR"></span><br>
+Place date/time here: <input name='datetime' class='datetime' id='datetime' type="datetime">
+<img onclick='datetime("datetime");' class='dpBtn' src='datetime/cal.jpg' name='cal' id='dtimg'>
+<span onclick="show_dt();" id="showdt">Show date</span><br>
+</body></html>

@@ -1,0 +1,8 @@
+/* drag/resize container */
+.drag{border:5px solid; width:200px; height:100px; position:fixed; top:100px; left:100px; cursor:move; z-index:20;}
+/* inner container (DRdiv object) */
+.indrag{width:100%; height:100%; position:absolute; top:0px; left:0px; z-index:0; background:lightgray;}
+/* resize borders */
+.resz{border:none;  position:absolute; opacity:0.5; width:100%; height:100%;}
+.resz:hover{border:1px dotted; background:gray;}
+
